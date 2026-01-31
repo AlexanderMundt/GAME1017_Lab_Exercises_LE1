@@ -1,6 +1,9 @@
+/* Completed By:    Alexander Mundt - 101632886
+ * Assignment:      Lab Exercise 1
+ * Class:           GAME-1017
+ * Professor:       Ernie Burrows
+ */
 using UnityEngine;
-using System.Collections.Generic;
-using System.Linq;
 
 public class SoundManager : Singleton<SoundManager>
 {
