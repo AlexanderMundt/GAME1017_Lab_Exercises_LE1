@@ -1,0 +1,52 @@
+using UnityEngine;
+using UnityEngine.UI;
+
+[RequireComponent(typeof(Slider))]
+public class SliderAudioController : MonoBehaviour
+{
+    [SerializeField] private EAudioType soundType;
+
+    private Slider slider;
+
+    private void Awake()
+    {
+        slider = GetComponent<Slider>();
+    }
+
+    private void Start()
+    {
+        ChangeAudioSliderVolume(slider.value);
+    }
+
+    //Delegates
+    private void OnEnable()
+    {
+        slider.onValueChanged.AddListener(ChangeAudioSliderVolume);
+    }
+
+    private void OnDisable()
+    {
+        slider.onValueChanged.RemoveListener(ChangeAudioSliderVolume);
+    }
+
+    private void ChangeAudioSliderVolume(float newVolume)
+    {
+        switch (soundType)
+        {
+            case EAudioType.None:
+                Debug.Log("Sound Type Not Set On: " + gameObject.name);
+                break;
+
+            case EAudioType.Music:
+                SoundManager.Instance.ChangeMusicVolume(newVolume);
+                break;
+
+            case EAudioType.Sfx:
+                SoundManager.Instance.ChangeSfxVolume(newVolume);
+                break;
+
+            default:
+                break;
+        }
+    }
+}
